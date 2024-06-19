@@ -70,6 +70,25 @@
     },
     "lastname": {
       "type": "string"
+    },
+    "photo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "researcher",
+        "developer",
+        "service",
+        "product designer"
+      ]
     }
   }
 }

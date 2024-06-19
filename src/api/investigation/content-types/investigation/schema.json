@@ -1,0 +1,98 @@
+{
+  "kind": "collectionType",
+  "collectionName": "investigations",
+  "info": {
+    "singularName": "investigation",
+    "pluralName": "investigations",
+    "displayName": "Investigation",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "investigation_types": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::investigation-type.investigation-type",
+      "inversedBy": "investigations"
+    },
+    "project": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project.project",
+      "inversedBy": "investigations"
+    },
+    "publics": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::public.public",
+      "inversedBy": "investigations"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "en curso",
+        "finalizado",
+        "por iniciar",
+        "bloqueado"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
+    },
+    "goal": {
+      "type": "string"
+    },
+    "teams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::team.team",
+      "inversedBy": "investigations"
+    },
+    "description": {
+      "type": "text"
+    },
+    "researchers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::researcher.researcher",
+      "inversedBy": "investigations"
+    },
+    "specific_goals": {
+      "type": "text"
+    },
+    "guide_media_link": {
+      "type": "string"
+    },
+    "initial_date": {
+      "type": "date"
+    },
+    "end_date": {
+      "type": "date"
+    },
+    "team_extended": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::researcher.researcher",
+      "inversedBy": "investigation_extended"
+    },
+    "presented_to": {
+      "type": "string"
+    },
+    "presented_date": {
+      "type": "date"
+    },
+    "materials": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::material.material",
+      "mappedBy": "investigation"
+    }
+  }
+}

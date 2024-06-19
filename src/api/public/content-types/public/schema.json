@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "publics",
+  "info": {
+    "singularName": "public",
+    "pluralName": "publics",
+    "displayName": "Public"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "investigations": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::investigation.investigation",
+      "mappedBy": "publics"
+    },
+    "materials": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::material.material",
+      "mappedBy": "publics"
+    }
+  }
+}

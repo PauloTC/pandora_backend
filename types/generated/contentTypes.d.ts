@@ -725,6 +725,10 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstname: Attribute.String;
     lastname: Attribute.String;
+    photo: Attribute.Media;
+    position: Attribute.Enumeration<
+      ['researcher', 'developer', 'service', 'product designer']
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -789,6 +793,352 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiInvestigationInvestigation extends Schema.CollectionType {
+  collectionName: 'investigations';
+  info: {
+    singularName: 'investigation';
+    pluralName: 'investigations';
+    displayName: 'Investigation';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    investigation_types: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToMany',
+      'api::investigation-type.investigation-type'
+    >;
+    project: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToOne',
+      'api::project.project'
+    >;
+    publics: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToMany',
+      'api::public.public'
+    >;
+    status: Attribute.Enumeration<
+      ['en curso', 'finalizado', 'por iniciar', 'bloqueado']
+    >;
+    slug: Attribute.UID<'api::investigation.investigation', 'name'>;
+    goal: Attribute.String;
+    teams: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToMany',
+      'api::team.team'
+    >;
+    description: Attribute.Text;
+    researchers: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToMany',
+      'api::researcher.researcher'
+    >;
+    specific_goals: Attribute.Text;
+    guide_media_link: Attribute.String;
+    initial_date: Attribute.Date;
+    end_date: Attribute.Date;
+    team_extended: Attribute.Relation<
+      'api::investigation.investigation',
+      'manyToMany',
+      'api::researcher.researcher'
+    >;
+    presented_to: Attribute.String;
+    presented_date: Attribute.Date;
+    materials: Attribute.Relation<
+      'api::investigation.investigation',
+      'oneToMany',
+      'api::material.material'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::investigation.investigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::investigation.investigation',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiInvestigationTypeInvestigationType
+  extends Schema.CollectionType {
+  collectionName: 'investigation_types';
+  info: {
+    singularName: 'investigation-type';
+    pluralName: 'investigation-types';
+    displayName: 'Investigation Type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    investigations: Attribute.Relation<
+      'api::investigation-type.investigation-type',
+      'manyToMany',
+      'api::investigation.investigation'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::investigation-type.investigation-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::investigation-type.investigation-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLocationLocation extends Schema.CollectionType {
+  collectionName: 'locations';
+  info: {
+    singularName: 'location';
+    pluralName: 'locations';
+    displayName: 'Location';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    materials: Attribute.Relation<
+      'api::location.location',
+      'manyToMany',
+      'api::material.material'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::location.location',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMaterialMaterial extends Schema.CollectionType {
+  collectionName: 'materials';
+  info: {
+    singularName: 'material';
+    pluralName: 'materials';
+    displayName: 'Material';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    sample: Attribute.Text;
+    tool: Attribute.String;
+    tool_media: Attribute.String;
+    slug: Attribute.UID;
+    investigation: Attribute.Relation<
+      'api::material.material',
+      'manyToOne',
+      'api::investigation.investigation'
+    >;
+    publics: Attribute.Relation<
+      'api::material.material',
+      'manyToMany',
+      'api::public.public'
+    >;
+    locations: Attribute.Relation<
+      'api::material.material',
+      'manyToMany',
+      'api::location.location'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::material.material',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::material.material',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectProject extends Schema.CollectionType {
+  collectionName: 'projects';
+  info: {
+    singularName: 'project';
+    pluralName: 'projects';
+    displayName: 'Project';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    alias: Attribute.String;
+    investigations: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::investigation.investigation'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPublicPublic extends Schema.CollectionType {
+  collectionName: 'publics';
+  info: {
+    singularName: 'public';
+    pluralName: 'publics';
+    displayName: 'Public';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    investigations: Attribute.Relation<
+      'api::public.public',
+      'manyToMany',
+      'api::investigation.investigation'
+    >;
+    materials: Attribute.Relation<
+      'api::public.public',
+      'manyToMany',
+      'api::material.material'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::public.public',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::public.public',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiResearcherResearcher extends Schema.CollectionType {
+  collectionName: 'researchers';
+  info: {
+    singularName: 'researcher';
+    pluralName: 'researchers';
+    displayName: 'Researcher';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    photo: Attribute.Media;
+    role: Attribute.Enumeration<
+      ['researcher', 'product_designer', 'developer', 'service']
+    >;
+    investigations: Attribute.Relation<
+      'api::researcher.researcher',
+      'manyToMany',
+      'api::investigation.investigation'
+    >;
+    investigation_extended: Attribute.Relation<
+      'api::researcher.researcher',
+      'manyToMany',
+      'api::investigation.investigation'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::researcher.researcher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::researcher.researcher',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTeamTeam extends Schema.CollectionType {
+  collectionName: 'teams';
+  info: {
+    singularName: 'team';
+    pluralName: 'teams';
+    displayName: 'Team';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    slug: Attribute.UID<'api::team.team', 'name'>;
+    investigations: Attribute.Relation<
+      'api::team.team',
+      'manyToMany',
+      'api::investigation.investigation'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::team.team', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -807,6 +1157,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::investigation.investigation': ApiInvestigationInvestigation;
+      'api::investigation-type.investigation-type': ApiInvestigationTypeInvestigationType;
+      'api::location.location': ApiLocationLocation;
+      'api::material.material': ApiMaterialMaterial;
+      'api::project.project': ApiProjectProject;
+      'api::public.public': ApiPublicPublic;
+      'api::researcher.researcher': ApiResearcherResearcher;
+      'api::team.team': ApiTeamTeam;
     }
   }
 }
