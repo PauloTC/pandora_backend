@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "costumers",
+  "info": {
+    "singularName": "costumer",
+    "pluralName": "costumers",
+    "displayName": "Costumer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "subtype": {
+      "type": "string"
+    },
+    "district": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "social_reason": {
+      "type": "string"
+    },
+    "ruc": {
+      "type": "string"
+    },
+    "cellphone": {
+      "type": "string"
+    },
+    "department": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    }
+  }
+}

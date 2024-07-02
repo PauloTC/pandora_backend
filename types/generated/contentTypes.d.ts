@@ -793,6 +793,46 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCostumerCostumer extends Schema.CollectionType {
+  collectionName: 'costumers';
+  info: {
+    singularName: 'costumer';
+    pluralName: 'costumers';
+    displayName: 'Costumer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    type: Attribute.String;
+    subtype: Attribute.String;
+    district: Attribute.String;
+    address: Attribute.String;
+    social_reason: Attribute.String;
+    ruc: Attribute.String;
+    cellphone: Attribute.String;
+    department: Attribute.String;
+    province: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::costumer.costumer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::costumer.costumer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiInvestigationInvestigation extends Schema.CollectionType {
   collectionName: 'investigations';
   info: {
@@ -1157,6 +1197,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::costumer.costumer': ApiCostumerCostumer;
       'api::investigation.investigation': ApiInvestigationInvestigation;
       'api::investigation-type.investigation-type': ApiInvestigationTypeInvestigationType;
       'api::location.location': ApiLocationLocation;
