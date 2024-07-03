@@ -774,7 +774,16 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     lastname: Attribute.String;
     photo: Attribute.Media;
     position: Attribute.Enumeration<
-      ['researcher', 'developer', 'service', 'product designer']
+      [
+        'researcher',
+        'developer',
+        'service',
+        'product designer',
+        'experimental designer',
+        'research & behavioral design lead',
+        'design strategy lead',
+        'product designer lead'
+      ]
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

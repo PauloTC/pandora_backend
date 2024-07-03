@@ -72,14 +72,15 @@
       "type": "string"
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "position": {
       "type": "enumeration",
@@ -87,7 +88,11 @@
         "researcher",
         "developer",
         "service",
-        "product designer"
+        "product designer",
+        "experimental designer",
+        "research & behavioral design lead",
+        "design strategy lead",
+        "product designer lead"
       ]
     }
   }
