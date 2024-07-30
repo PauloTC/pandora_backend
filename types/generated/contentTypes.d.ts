@@ -902,6 +902,7 @@ export interface ApiInvestigationInvestigation extends Schema.CollectionType {
       'oneToMany',
       'api::material.material'
     >;
+    research_plan: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

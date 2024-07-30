@@ -93,6 +93,9 @@
       "relation": "oneToMany",
       "target": "api::material.material",
       "mappedBy": "investigation"
+    },
+    "research_plan": {
+      "type": "string"
     }
   }
 }
