@@ -842,6 +842,96 @@ export interface ApiCostumerCostumer extends Schema.CollectionType {
   };
 }
 
+export interface ApiExperimentExperiment extends Schema.CollectionType {
+  collectionName: 'experiments';
+  info: {
+    singularName: 'experiment';
+    pluralName: 'experiments';
+    displayName: 'Experiment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    status: Attribute.Enumeration<
+      ['en curso', 'cancelado', 'finalizado', 'en pausa']
+    >;
+    initial_date: Attribute.Date;
+    end_date: Attribute.Date;
+    problem_definition: Attribute.Blocks;
+    hypotesis: Attribute.Blocks;
+    description: Attribute.Blocks;
+    results: Attribute.Blocks;
+    experiment_type: Attribute.Relation<
+      'api::experiment.experiment',
+      'manyToOne',
+      'api::experiment-type.experiment-type'
+    >;
+    participants: Attribute.Relation<
+      'api::experiment.experiment',
+      'manyToMany',
+      'api::researcher.researcher'
+    >;
+    vp: Attribute.Relation<
+      'api::experiment.experiment',
+      'manyToOne',
+      'api::vp.vp'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::experiment.experiment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::experiment.experiment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiExperimentTypeExperimentType extends Schema.CollectionType {
+  collectionName: 'experiment_types';
+  info: {
+    singularName: 'experiment-type';
+    pluralName: 'experiment-types';
+    displayName: 'Experiment Type';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    experiments: Attribute.Relation<
+      'api::experiment-type.experiment-type',
+      'oneToMany',
+      'api::experiment.experiment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::experiment-type.experiment-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::experiment-type.experiment-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiInvestigationInvestigation extends Schema.CollectionType {
   collectionName: 'investigations';
   info: {
@@ -1143,6 +1233,11 @@ export interface ApiResearcherResearcher extends Schema.CollectionType {
       'manyToMany',
       'api::investigation.investigation'
     >;
+    experiments: Attribute.Relation<
+      'api::researcher.researcher',
+      'manyToMany',
+      'api::experiment.experiment'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1189,6 +1284,33 @@ export interface ApiTeamTeam extends Schema.CollectionType {
   };
 }
 
+export interface ApiVpVp extends Schema.CollectionType {
+  collectionName: 'vps';
+  info: {
+    singularName: 'vp';
+    pluralName: 'vps';
+    displayName: 'Vp';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    experiments: Attribute.Relation<
+      'api::vp.vp',
+      'oneToMany',
+      'api::experiment.experiment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::vp.vp', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::vp.vp', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1208,6 +1330,8 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::costumer.costumer': ApiCostumerCostumer;
+      'api::experiment.experiment': ApiExperimentExperiment;
+      'api::experiment-type.experiment-type': ApiExperimentTypeExperimentType;
       'api::investigation.investigation': ApiInvestigationInvestigation;
       'api::investigation-type.investigation-type': ApiInvestigationTypeInvestigationType;
       'api::location.location': ApiLocationLocation;
@@ -1216,6 +1340,7 @@ declare module '@strapi/types' {
       'api::public.public': ApiPublicPublic;
       'api::researcher.researcher': ApiResearcherResearcher;
       'api::team.team': ApiTeamTeam;
+      'api::vp.vp': ApiVpVp;
     }
   }
 }

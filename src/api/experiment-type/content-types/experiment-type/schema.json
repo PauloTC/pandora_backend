@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "experiment_types",
+  "info": {
+    "singularName": "experiment-type",
+    "pluralName": "experiment-types",
+    "displayName": "Experiment Type"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "experiments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::experiment.experiment",
+      "mappedBy": "experiment_type"
+    }
+  }
+}

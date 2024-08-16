@@ -44,6 +44,12 @@
       "relation": "manyToMany",
       "target": "api::investigation.investigation",
       "mappedBy": "team_extended"
+    },
+    "experiments": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::experiment.experiment",
+      "mappedBy": "participants"
     }
   }
 }
