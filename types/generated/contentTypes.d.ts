@@ -842,6 +842,43 @@ export interface ApiCostumerCostumer extends Schema.CollectionType {
   };
 }
 
+export interface ApiExecutionMethodExecutionMethod
+  extends Schema.CollectionType {
+  collectionName: 'execution_methods';
+  info: {
+    singularName: 'execution-method';
+    pluralName: 'execution-methods';
+    displayName: 'Execution Method';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    alias: Attribute.String;
+    experiments: Attribute.Relation<
+      'api::execution-method.execution-method',
+      'manyToMany',
+      'api::experiment.experiment'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::execution-method.execution-method',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::execution-method.execution-method',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiExperimentExperiment extends Schema.CollectionType {
   collectionName: 'experiments';
   info: {
@@ -879,6 +916,15 @@ export interface ApiExperimentExperiment extends Schema.CollectionType {
       'manyToOne',
       'api::vp.vp'
     >;
+    execution_methods: Attribute.Relation<
+      'api::experiment.experiment',
+      'manyToMany',
+      'api::execution-method.execution-method'
+    >;
+    strategic_area: Attribute.String;
+    stakeholder: Attribute.String;
+    roi: Attribute.String;
+    reference: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1330,6 +1376,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::costumer.costumer': ApiCostumerCostumer;
+      'api::execution-method.execution-method': ApiExecutionMethodExecutionMethod;
       'api::experiment.experiment': ApiExperimentExperiment;
       'api::experiment-type.experiment-type': ApiExperimentTypeExperimentType;
       'api::investigation.investigation': ApiInvestigationInvestigation;

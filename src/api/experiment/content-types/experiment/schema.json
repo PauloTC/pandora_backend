@@ -59,6 +59,24 @@
       "relation": "manyToOne",
       "target": "api::vp.vp",
       "inversedBy": "experiments"
+    },
+    "execution_methods": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::execution-method.execution-method",
+      "inversedBy": "experiments"
+    },
+    "strategic_area": {
+      "type": "string"
+    },
+    "stakeholder": {
+      "type": "string"
+    },
+    "roi": {
+      "type": "string"
+    },
+    "reference": {
+      "type": "string"
     }
   }
 }

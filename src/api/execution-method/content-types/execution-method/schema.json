@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "execution_methods",
+  "info": {
+    "singularName": "execution-method",
+    "pluralName": "execution-methods",
+    "displayName": "Execution Method"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "alias": {
+      "type": "string"
+    },
+    "experiments": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::experiment.experiment",
+      "mappedBy": "execution_methods"
+    }
+  }
+}
