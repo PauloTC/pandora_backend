@@ -1259,6 +1259,7 @@ export interface ApiResearcherResearcher extends Schema.CollectionType {
     singularName: 'researcher';
     pluralName: 'researchers';
     displayName: 'Researcher';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1267,7 +1268,14 @@ export interface ApiResearcherResearcher extends Schema.CollectionType {
     name: Attribute.String;
     photo: Attribute.Media;
     role: Attribute.Enumeration<
-      ['researcher', 'product_designer', 'developer', 'service']
+      [
+        'researcher',
+        'product_designer',
+        'developer',
+        'service',
+        'design_manager',
+        'behavioral_designer'
+      ]
     >;
     investigations: Attribute.Relation<
       'api::researcher.researcher',

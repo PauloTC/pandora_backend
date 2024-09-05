@@ -4,7 +4,8 @@
   "info": {
     "singularName": "researcher",
     "pluralName": "researchers",
-    "displayName": "Researcher"
+    "displayName": "Researcher",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,14 +16,15 @@
       "type": "string"
     },
     "photo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "role": {
       "type": "enumeration",
@@ -30,7 +32,9 @@
         "researcher",
         "product_designer",
         "developer",
-        "service"
+        "service",
+        "design_manager",
+        "behavioral_designer"
       ]
     },
     "investigations": {
