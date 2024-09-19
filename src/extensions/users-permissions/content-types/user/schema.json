@@ -94,6 +94,12 @@
         "design strategy lead",
         "product designer lead"
       ]
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "user"
     }
   }
 }
