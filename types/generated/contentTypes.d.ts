@@ -976,6 +976,10 @@ export interface ApiExperimentExperiment extends Schema.CollectionType {
       'oneToMany',
       'api::comment.comment'
     >;
+    second_problem_definition: Attribute.RichText;
+    second_hypotesis: Attribute.RichText;
+    second_description: Attribute.RichText;
+    second_results: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

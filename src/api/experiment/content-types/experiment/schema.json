@@ -83,6 +83,18 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "experiment"
+    },
+    "second_problem_definition": {
+      "type": "richtext"
+    },
+    "second_hypotesis": {
+      "type": "richtext"
+    },
+    "second_description": {
+      "type": "richtext"
+    },
+    "second_results": {
+      "type": "richtext"
     }
   }
 }
